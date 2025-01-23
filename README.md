@@ -72,19 +72,6 @@ node index.js [--length <number>] [--uppercase] [--numbers] [--symbols]
      --help        Show this help message
    ```
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd password-generator
-   ```
-3. Install dependencies (if any are added in the future):
-   ```bash
-   npm install
-   ```
 
 ## Project Structure
 ```
@@ -94,20 +81,6 @@ password-generator/
 ├── README.md     # Project documentation
 ```
 
-## Contributing
-1. Create a new branch for your feature:
-   ```bash
-   git checkout -b feature-name
-   ```
-2. Commit your changes:
-   ```bash
-   git commit -m "Add feature: feature-name"
-   ```
-3. Push to the branch:
-   ```bash
-   git push origin feature-name
-   ```
-4. Open a pull request on GitHub.
 
 ## License
 This project is open-source and available under the [MIT License](LICENSE).
