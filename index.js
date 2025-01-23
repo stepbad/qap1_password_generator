@@ -3,10 +3,20 @@
 
 // Constants
 const DEFAULT_LENGTH = 8;
+const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const NUMBERS = "0123456789";
+const SYMBOLS = "!@#$%^&*()_+-=[]{}|;:',.<>?/";
 
 // Function to generate a password
-function generatePassword(length) {
-  const characters = "abcdefghijklmnopqrstuvwxyz";
+function generatePassword(length, includeUppercase, includeNumbers, includeSymbols) {
+  let characters = LOWERCASE;
+
+  // Add character sets based on flags
+  if (includeUppercase) characters += UPPERCASE;
+  if (includeNumbers) characters += NUMBERS;
+  if (includeSymbols) characters += SYMBOLS;
+
   let password = "";
   for (let i = 0; i < length; i++) {
     password += characters[Math.floor(Math.random() * characters.length)];
@@ -16,7 +26,7 @@ function generatePassword(length) {
 
 // Function to parse arguments
 function parseArgs(args) {
-  const options = { length: DEFAULT_LENGTH };
+  const options = { length: DEFAULT_LENGTH, includeUppercase: false, includeNumbers: false, includeSymbols: false };
 
   args.forEach((arg, index) => {
     if (arg === "--length" && args[index + 1]) {
@@ -27,13 +37,22 @@ function parseArgs(args) {
         console.error("Error: Invalid length provided. Please provide a positive number.");
         process.exit(1);
       }
+    } else if (arg === "--uppercase") {
+      options.includeUppercase = true;
+    } else if (arg === "--numbers") {
+      options.includeNumbers = true;
+    } else if (arg === "--symbols") {
+      options.includeSymbols = true;
     } else if (arg === "--help") {
       console.log(`
         Usage:
-          node index.js [--length <number>]
+          node index.js [--length <number>] [--uppercase] [--numbers] [--symbols]
         Options:
-          --length    Specify the password length (default: 8)
-          --help      Show this help message
+          --length      Specify the password length (default: 8)
+          --uppercase   Include uppercase letters
+          --numbers     Include numbers
+          --symbols     Include symbols
+          --help        Show this help message
       `);
       process.exit(0);
     }
@@ -47,4 +66,4 @@ const args = process.argv.slice(2);
 const options = parseArgs(args);
 
 // Generate and display the password
-console.log("Generated Password:", generatePassword(options.length));
+console.log("Generated Password:", generatePassword(options.length, options.includeUppercase, options.includeNumbers, options.includeSymbols));
